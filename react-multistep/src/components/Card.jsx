@@ -10,31 +10,55 @@ function CardHeader(props) {
         </h1>
         <p className="text-[#9699AB]">{props.desc}</p>
       </div>
-
-      {/* <div className="flex flex-col">
-        <form>
-          <div className="flex flex-col">
-            <label htmlFor="name">Name</label>
-            <input type="text" placeholder="e.g. Stephen King" />
-          </div>
-
-          <div className="flex flex-col">
-            <label htmlFor="email">Email Address</label>
-            <input type="email" placeholder="e.g. stephenking@lorem.com" />
-          </div>
-
-          <div className="flex flex-col">
-            <label htmlFor="phone">Phone Number</label>
-            <input type="text" placeholder="e.g. +1 234 567 890" />
-          </div>
-
-          <button className="bg-[#02295A] text-white p-3 rounded-md">
-            Next Step
-          </button>
-        </form>
-      </div> */}
     </div>
   );
+}
+
+function InputTemplate(props) {
+  return (
+    <div className="flex flex-col mb-5">
+      <label
+        htmlFor={props.field}
+        className="capitalize font-[400] text-[#02295A]"
+      >
+        {props.label}
+      </label>
+      <input
+        type={props.type}
+        placeholder={props.example}
+        className="border border-[#9699AB] rounded-lg h-12 p-5 mt-2"
+      />
+    </div>
+  );
+}
+
+class PersonalInfo extends Component {
+  render() {
+    return (
+      <div className="flex flex-col my-10">
+        <form>
+          <InputTemplate
+            field="name"
+            label="name"
+            type="text"
+            example="e.g. Stephen King"
+          />
+          <InputTemplate
+            field="email"
+            label="email address"
+            type="email"
+            example="e.g. stephenking@lorem.com"
+          />
+          <InputTemplate
+            field="phone"
+            label="phone number"
+            type="text"
+            example="e.g. +1 234 567 890"
+          />
+        </form>
+      </div>
+    );
+  }
 }
 
 class Card extends Component {
@@ -42,11 +66,16 @@ class Card extends Component {
     return (
       <div className="flex flex-row w-3/5 bg-white rounded-xl h-2/3 p-3">
         <Sidebar />
-        <div className="w-2/3 flex flex-col ">
+        <div className="w-2/3 flex flex-col mx-20">
           <CardHeader
             header="Personal info"
             desc="Please provide your name, email address, and phone number."
           />
+          <PersonalInfo />
+
+          <button className="bg-[#02295A] text-white p-3 rounded-md w-1/5 place-self-end">
+            Next Step
+          </button>
         </div>
       </div>
     );
