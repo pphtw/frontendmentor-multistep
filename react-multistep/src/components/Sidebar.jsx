@@ -27,7 +27,7 @@ function Progress(props) {
 
 function Sidebar(props) {
   return (
-    <div className="bg-[url('/bg-sidebar-desktop.svg')] bg-contain flex flex-col w-1/3 h-full bg-no-repeat pt-10">
+    <div className="bg-[url('/bg-sidebar-desktop.svg')] bg-cover flex flex-col w-1/3 h-full bg-no-repeat pt-10">
       <Progress isActive={props.progress == 1} step="1" progress="YOUR INFO" />
       <Progress
         isActive={props.progress == 2}
