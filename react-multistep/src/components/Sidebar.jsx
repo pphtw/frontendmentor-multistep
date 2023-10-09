@@ -1,9 +1,18 @@
 import { Component } from "react";
 
+const circleStyle =
+  "flex text-md font-bold mr-5 border-2 justify-center items-center border-[#F0F6FF] rounded-full w-12 h-12";
+
 function Progress(props) {
   return (
     <div className="flex flex-row items-center mx-10 my-5">
-      <div className="flex text-md font-bold mr-5 border-2 justify-center items-center text-[#F0F6FF] border-[#F0F6FF] rounded-full w-12 h-12">
+      <div
+        className={
+          props.isActive
+            ? `${circleStyle} text-[#02295A] bg-[#F0F6FF]`
+            : `${circleStyle} text-[#F0F6FF] `
+        }
+      >
         {props.step}
       </div>
       <div className="flex flex-col">
@@ -16,17 +25,19 @@ function Progress(props) {
   );
 }
 
-class Sidebar extends Component {
-  render() {
-    return (
-      <div className="bg-[url('/bg-sidebar-desktop.svg')] bg-contain flex flex-col w-1/3 h-full bg-no-repeat pt-10">
-        <Progress step="1" progress="YOUR INFO" />
-        <Progress step="2" progress="SELECT PLAN" />
-        <Progress step="3" progress="ADD-ONS" />
-        <Progress step="4" progress="SUMMARY" />
-      </div>
-    );
-  }
+function Sidebar(props) {
+  return (
+    <div className="bg-[url('/bg-sidebar-desktop.svg')] bg-contain flex flex-col w-1/3 h-full bg-no-repeat pt-10">
+      <Progress isActive={props.progress == 1} step="1" progress="YOUR INFO" />
+      <Progress
+        isActive={props.progress == 2}
+        step="2"
+        progress="SELECT PLAN"
+      />
+      <Progress isActive={props.progress == 3} step="3" progress="ADD-ONS" />
+      <Progress isActive={props.progress == 4} step="4" progress="SUMMARY" />
+    </div>
+  );
 }
 
 export default Sidebar;
