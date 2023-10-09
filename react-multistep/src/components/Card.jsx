@@ -68,35 +68,35 @@ class PersonalInfo extends Component {
 }
 
 function OptionTemplate(props) {
-  const planItem = props.plan;
+  const dataItem = props.plan;
   return (
     <div className="w-1/3">
       <input
         className="hidden peer"
         type="radio"
         name={props.name}
-        value={planItem.planName}
-        id={planItem.planName}
+        value={dataItem.id}
+        id={dataItem.id}
         defaultChecked={props.selected}
       />
       <label
-        htmlFor={planItem.planName}
+        htmlFor={dataItem.id}
         className="flex flex-col border p-5 rounded-md w-full h-48 hover:border-[#473DFF] peer-checked:border-[#473DFF] "
       >
         {/* <div className="flex flex-col border p-5 rounded-md h-48"> */}
         <div className="h-2/3">
           <img
-            src={`/icon-${planItem.planName.toLowerCase()}.svg`}
+            src={`/icon-${dataItem.planName.toLowerCase()}.svg`}
             className="w-12"
           />
         </div>
 
         <div className="h/1/3">
-          <p className="text-[#02295A] font-[700] capitalize">
-            {planItem.planName}
+          <p className="text-[#02295A] text-lg font-[700] capitalize">
+            {dataItem.planName}
           </p>
           <p>
-            ${props.monthly ? planItem.monthBill : planItem.yearBill}/
+            ${props.monthly ? dataItem.monthBill : dataItem.yearBill}/
             {props.monthly ? "mo" : "year"}
           </p>
         </div>
@@ -109,9 +109,9 @@ function OptionTemplate(props) {
 function Plan() {
   const [monthly, setMonthly] = useState(true);
   const planData = [
-    { planName: "arcade", monthBill: 9, yearBill: 90 },
-    { planName: "advanced", monthBill: 12, yearBill: 120 },
-    { planName: "pro", monthBill: 15, yearBill: 150 },
+    { id: 1, planName: "arcade", monthBill: 9, yearBill: 90 },
+    { id: 2, planName: "advanced", monthBill: 12, yearBill: 120 },
+    { id: 3, planName: "pro", monthBill: 15, yearBill: 150 },
   ];
   return (
     <div>
@@ -172,12 +172,81 @@ function Plan() {
   );
 }
 
+function CheckboxTemplate(props) {
+  const dataItem = props.data;
+  return (
+    <div className="flex flex-row w-full p-5 rounded-md border peer-checked:border-[#473DFF] ">
+      <label
+        htmlFor={dataItem.id}
+        className=" flex flex-row justify-items-stretch w-full items-center"
+      >
+        <input
+          className="w-5 h-5 rounded-md peer peer-checked:text-[#473DFF]"
+          type="checkbox"
+          name={props.name}
+          id={dataItem.id}
+          value={dataItem.id}
+        />
+
+        <div className="ml-5 w-full">
+          <p className="text-lg text-[#02295A] font-[700]">{dataItem.addOn}</p>
+          <p className="text-[#9699AB]">{dataItem.desc}</p>
+        </div>
+        <div className=" flex items-center justify-self-end">
+          <p className="text-[#473DFF]">+{dataItem.month}/mo</p>
+        </div>
+      </label>
+    </div>
+  );
+}
+
+function AddOns() {
+  const addOnData = [
+    {
+      id: 1,
+      addOn: "Online service",
+      desc: "Access to multiplayer games",
+      month: 1,
+      year: 10,
+    },
+    {
+      id: 2,
+      addOn: "Larger storage",
+      desc: "Extra 1TB of cloud save",
+      month: 2,
+      year: 20,
+    },
+    {
+      id: 3,
+      addOn: "Customizable Profile",
+      desc: "Custom theme on your profile",
+      month: 1,
+      year: 10,
+    },
+  ];
+  return (
+    <div>
+      <CardHeader
+        header="Pick add-ons"
+        desc="Add-ons help enhance your gaming experience."
+      />
+      <form className="flex flex-col gap-y-5 my-10 w-full ">
+        <CheckboxTemplate name="addons" data={addOnData[0]} />
+        <CheckboxTemplate name="addons" data={addOnData[1]} />
+        <CheckboxTemplate name="addons" data={addOnData[2]} />
+      </form>
+    </div>
+  );
+}
+
 function BodyInformation(props) {
   switch (parseInt(props.progress)) {
     case 1:
       return <PersonalInfo />;
     case 2:
       return <Plan />;
+    case 3:
+      return <AddOns />;
   }
 }
 
