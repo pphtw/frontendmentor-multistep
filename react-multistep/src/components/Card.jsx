@@ -1,4 +1,4 @@
-import { Component, useState, useReducer } from "react";
+import { useState } from "react";
 import Sidebar from "./Sidebar";
 import {
   CheckboxTemplate,
@@ -7,46 +7,58 @@ import {
   CardHeader,
 } from "../templates/CardTemplate";
 
-class PersonalInfo extends Component {
-  render() {
-    return (
-      <div>
-        <CardHeader
-          header="Personal info"
-          desc="Please provide your name, email address, and phone number."
-        />
-        <div className="flex flex-col my-10">
-          <form>
-            <InputTemplate
-              field="name"
-              label="name"
-              type="text"
-              example="e.g. Stephen King"
-            />
-            <InputTemplate
-              field="email"
-              label="email address"
-              type="email"
-              example="e.g. stephenking@lorem.com"
-            />
-            <InputTemplate
-              field="phone"
-              label="phone number"
-              type="text"
-              example="e.g. +1 234 567 890"
-            />
-          </form>
-        </div>
+const inputData = {
+  name: "",
+  email: "",
+  phone: "",
+  plan: 1,
+  monthly: true,
+  addons: [],
+};
+
+// console.log(inputData);
+
+function PersonalInfo() {
+  return (
+    <div>
+      <CardHeader
+        header="Personal info"
+        desc="Please provide your name, email address, and phone number."
+      />
+      <div className="flex flex-col my-10">
+        <form>
+          <InputTemplate
+            field="name"
+            label="name"
+            type="text"
+            example="e.g. Stephen King"
+            value={inputData.name}
+          />
+          <InputTemplate
+            field="email"
+            label="email address"
+            type="email"
+            example="e.g. stephenking@lorem.com"
+          />
+          <InputTemplate
+            field="phone"
+            label="phone number"
+            type="text"
+            example="e.g. +1 234 567 890"
+          />
+        </form>
       </div>
-    );
-  }
+    </div>
+  );
 }
 
-function Plan() {
-  const [monthly, setMonthly] = useState(true);
+function Plan({ MonthlyState }) {
+  // const [monthly, setMonthly] = useState(true);
+  const { monthly, setMonthly } = MonthlyState;
+
   const planData = [
     { id: 1, planName: "arcade", month: 9, year: 90 },
-    { id: 2, planName: "advanced", monthBill: 12, year: 120 },
+    { id: 2, planName: "advanced", month: 12, year: 120 },
     { id: 3, planName: "pro", month: 15, year: 150 },
   ];
   return (
@@ -63,18 +75,21 @@ function Plan() {
             plan={planData[0]}
             selected={true}
             monthly={monthly}
+            required
           />
           <OptionTemplate
             name="plan"
             plan={planData[1]}
             monthly={monthly}
             selected={false}
+            required
           />
           <OptionTemplate
             name="plan"
             plan={planData[2]}
             monthly={monthly}
             selected={false}
+            required
           />
         </div>
       </form>
@@ -93,6 +108,7 @@ function Plan() {
             onClick={() => setMonthly(!monthly)}
             type="checkbox"
             className="sr-only peer"
+            defaultChecked={!monthly}
           />
           <div className="w-11 h-6 bg-[#02295A] peer-focus:outline-none peer-focus:ring-4 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all  "></div>
         </label>
@@ -108,7 +124,9 @@ function Plan() {
   );
 }
 
-function AddOns() {
+function AddOns({ MonthlyState }) {
+  const { monthly } = MonthlyState;
+  console.log(monthly);
   const addOnData = [
     {
       id: 1,
@@ -139,22 +157,43 @@ function AddOns() {
         desc="Add-ons help enhance your gaming experience."
       />
       <form className="flex flex-col gap-y-5 my-10 w-full ">
-        <CheckboxTemplate name="addons" data={addOnData[0]} />
-        <CheckboxTemplate name="addons" data={addOnData[1]} />
-        <CheckboxTemplate name="addons" data={addOnData[2]} />
+        <CheckboxTemplate name="addons" data={addOnData[0]} monthly={monthly} />
+        <CheckboxTemplate name="addons" data={addOnData[1]} monthly={monthly} />
+        <CheckboxTemplate name="addons" data={addOnData[2]} monthly={monthly} />
       </form>
     </div>
   );
 }
 
+function Summary() {
+  return (
+    <div>
+      <CardHeader
+        header="Finishing up"
+        desc="Double-check everything looks OK before confirming."
+      />
+    </div>
+  );
+}
+
 function BodyInformation(props) {
+  const [monthly, setMonthly] = useState(true);
+
+  //MonthlyState
+  const MonthlyState = {
+    monthly,
+    setMonthly,
+  };
+
   switch (parseInt(props.progress)) {
     case 1:
       return <PersonalInfo />;
     case 2:
-      return <Plan />;
+      return <Plan MonthlyState={MonthlyState} />;
     case 3:
-      return <AddOns />;
+      return <AddOns MonthlyState={MonthlyState} />;
+    case 4:
+      return <Summary MonthlyState={MonthlyState} />;
   }
 }
 

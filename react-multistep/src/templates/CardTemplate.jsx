@@ -96,7 +96,9 @@ function CheckboxTemplate(props) {
           <p className="text-[#9699AB]">{dataItem.desc}</p>
         </div>
         <div className=" flex items-center justify-self-end">
-          <p className="text-[#473DFF]">+${dataItem.month}/mo</p>
+          <p className="text-[#473DFF]">
+            +${dataItem.month}/{props.monthly ? "mo" : "yr"}
+          </p>
         </div>
       </label>
     </div>
