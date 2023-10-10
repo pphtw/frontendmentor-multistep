@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import Sidebar from "./Sidebar";
 import {
   CheckboxTemplate,
@@ -15,8 +15,6 @@ const inputData = {
   monthly: true,
   addons: [],
 };
-
-// console.log(inputData);
 
 function PersonalInfo() {
   return (
@@ -53,7 +51,6 @@ function PersonalInfo() {
 }
 
 function Plan({ MonthlyState }) {
-  // const [monthly, setMonthly] = useState(true);
   const { monthly, setMonthly } = MonthlyState;
 
   const planData = [
@@ -126,7 +123,6 @@ function Plan({ MonthlyState }) {
 
 function AddOns({ MonthlyState }) {
   const { monthly } = MonthlyState;
-  console.log(monthly);
   const addOnData = [
     {
       id: 1,
@@ -176,16 +172,8 @@ function Summary() {
   );
 }
 
-function BodyInformation(props) {
-  const [monthly, setMonthly] = useState(true);
-
-  //MonthlyState
-  const MonthlyState = {
-    monthly,
-    setMonthly,
-  };
-
-  switch (parseInt(props.progress)) {
+function BodyInformation({ MonthlyState, progress }) {
+  switch (parseInt(progress)) {
     case 1:
       return <PersonalInfo />;
     case 2:
@@ -199,17 +187,32 @@ function BodyInformation(props) {
 
 function Card() {
   const [active, setActive] = useState(1);
+  const [monthly, setMonthly] = useState(true);
+  const MonthlyState = {
+    monthly,
+    setMonthly,
+  };
   return (
     <div className="flex flex-row w-3/5 bg-white rounded-xl h-2/3 p-3">
       <Sidebar progress={active} />
       <div className="flex flex-col justify-between mx-20 h-full w-full">
         {/* each section progress */}
         <div className="flex flex-col">
-          {active === 1 && <BodyInformation progress={1} />}
-          {active === 2 && <BodyInformation progress={2} />}
-          {active === 3 && <BodyInformation progress={3} />}
-          {active === 4 && <BodyInformation progress={4} />}
-          {active === 5 && <BodyInformation progress={5} />}
+          {active === 1 && (
+            <BodyInformation progress={1} MonthlyState={MonthlyState} />
+          )}
+          {active === 2 && (
+            <BodyInformation progress={2} MonthlyState={MonthlyState} />
+          )}
+          {active === 3 && (
+            <BodyInformation progress={3} MonthlyState={MonthlyState} />
+          )}
+          {active === 4 && (
+            <BodyInformation progress={4} MonthlyState={MonthlyState} />
+          )}
+          {active === 5 && (
+            <BodyInformation progress={5} MonthlyState={MonthlyState} />
+          )}
         </div>
 
         {/* button section */}
