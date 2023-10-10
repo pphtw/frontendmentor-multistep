@@ -81,7 +81,7 @@ function OptionTemplate(props) {
       />
       <label
         htmlFor={dataItem.id}
-        className="flex flex-col border p-5 rounded-md w-full h-48 hover:border-[#473DFF] peer-checked:border-[#473DFF] "
+        className="flex cursor-pointer flex-col border p-5 rounded-md w-full h-48 hover:border-[#473DFF] peer-checked:border-[#473DFF] "
       >
         {/* <div className="flex flex-col border p-5 rounded-md h-48"> */}
         <div className="h-2/3">
@@ -173,22 +173,27 @@ function Plan() {
 }
 
 function CheckboxTemplate(props) {
+  const [checked, setchecked] = useState(false);
   const dataItem = props.data;
   return (
-    <div className="flex flex-row w-full p-5 rounded-md border peer-checked:border-[#473DFF] ">
+    <div className="flex flex-row w-full">
       <label
         htmlFor={dataItem.id}
-        className=" flex flex-row justify-items-stretch w-full items-center"
+        className={`flex flex-row p-5 peer justify-items-stretch w-full h-full items-center rounded-lg cursor-pointer border hover:border-[#473DFF] hover:bg-[#473DFF]/5 ${
+          checked ? "bg-[#473DFF]/5 border-[#473DFF]" : ""
+        } `}
       >
         <input
-          className="w-5 h-5 rounded-md peer peer-checked:text-[#473DFF]"
+          className="w-5 h-5 rounded-lg peer accent-[#473DFF]"
           type="checkbox"
           name={props.name}
           id={dataItem.id}
           value={dataItem.id}
+          required
+          onClick={() => setchecked(!checked)}
         />
 
-        <div className="ml-5 w-full">
+        <div className="w-full ml-5">
           <p className="text-lg text-[#02295A] font-[700]">{dataItem.addOn}</p>
           <p className="text-[#9699AB]">{dataItem.desc}</p>
         </div>
