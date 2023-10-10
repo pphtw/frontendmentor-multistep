@@ -27,6 +27,8 @@ function InputTemplate(props) {
         type={props.type}
         placeholder={props.example}
         className="border border-[#9699AB] rounded-lg h-12 p-5 mt-2"
+        value={props.value}
+        onInput={props.inputHandler}
       />
     </div>
   );
