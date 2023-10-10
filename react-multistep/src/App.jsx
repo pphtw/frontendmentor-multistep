@@ -1,5 +1,5 @@
 import { Component } from "react";
-import Card from "./components/Card";
+import Card from "./components/UI/organisms/Card";
 
 function App(props) {
   return (

@@ -23,6 +23,7 @@ function InputTemplate(props) {
         {props.label}
       </label>
       <input
+        id={props.field}
         type={props.type}
         placeholder={props.example}
         className="border border-[#9699AB] rounded-lg h-12 p-5 mt-2"
