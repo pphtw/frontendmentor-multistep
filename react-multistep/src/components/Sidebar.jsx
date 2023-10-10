@@ -5,7 +5,7 @@ const circleStyle =
 
 function Progress(props) {
   return (
-    <div className="flex flex-row items-center mx-10 my-5">
+    <div className="flex flex-row w-full items-center mx-10 my-5">
       <div
         className={
           props.isActive
@@ -27,7 +27,7 @@ function Progress(props) {
 
 function Sidebar(props) {
   return (
-    <div className="bg-[url('/bg-sidebar-desktop.svg')] bg-cover flex flex-col w-1/3 h-full bg-no-repeat pt-10">
+    <div className="bg-[url('/bg-sidebar-desktop.svg')] bg-cover flex flex-col w-1/2 h-full rounded-lg bg-no-repeat pt-10">
       <Progress isActive={props.progress == 1} step="1" progress="YOUR INFO" />
       <Progress
         isActive={props.progress == 2}
