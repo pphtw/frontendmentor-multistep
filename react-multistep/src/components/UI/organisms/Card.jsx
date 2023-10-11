@@ -32,7 +32,9 @@ function Card() {
     phone: "",
     plan: 1,
     monthly: true,
-    addons: [],
+    addOn1: false,
+    addOn2: false,
+    addOn3: false,
   };
 
   const [data, setData] = useState(inputData);
@@ -41,7 +43,9 @@ function Card() {
   const [emailInput, setEmail] = useState("");
   const [phoneInput, setPhone] = useState("");
   const [plan, setPlan] = useState(1);
-  const [addOns, setAddOns] = useState([]);
+  const [addOn1, setAddOn1] = useState(false);
+  const [addOn2, setAddOn2] = useState(false);
+  const [addOn3, setAddOn3] = useState(false);
 
   const DataState = {
     nameInput,
@@ -52,8 +56,12 @@ function Card() {
     setPhone,
     plan,
     setPlan,
-    addOns,
-    setAddOns,
+    addOn1,
+    setAddOn1,
+    addOn2,
+    setAddOn2,
+    addOn3,
+    setAddOn3,
   };
 
   const progressOneHandler = () => {
@@ -81,7 +89,11 @@ function Card() {
   };
 
   const progressThreeHanler = () => {
+    data.addOn1 = addOn1;
+    data.addOn2 = addOn2;
+    data.addOn3 = addOn3;
     setActive(4);
+    console.log(data);
   };
 
   const confirm = () => {};

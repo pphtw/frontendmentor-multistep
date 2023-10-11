@@ -86,8 +86,6 @@ function OptionTemplate({ plan, name, selected, monthly, selectPlan }) {
 }
 
 function CheckboxTemplate({ data, selectItem, name, monthly, checked }) {
-  console.log(checked);
-  // const [checked, setchecked] = useState(false);
   const dataItem = data;
   return (
     <div className="flex flex-row w-full">

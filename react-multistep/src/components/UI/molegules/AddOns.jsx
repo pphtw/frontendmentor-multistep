@@ -1,9 +1,7 @@
 import { CardHeader, CheckboxTemplate } from "../../../templates/CardTemplate";
-import { useState } from "react";
 function AddOns({ MonthlyState, DataState }) {
   const { monthly } = MonthlyState;
-  const { addOns, setAddOns } = DataState;
-  const [checked, setchecked] = useState(false);
+  const { addOn1, setAddOn1, addOn2, setAddOn2, addOn3, setAddOn3 } = DataState;
 
   const addOnData = [
     {
@@ -29,8 +27,18 @@ function AddOns({ MonthlyState, DataState }) {
     },
   ];
 
-  const selectItem = () => {
-    setchecked(!checked);
+  const selectItem = (e) => {
+    switch (parseInt(e.target.value)) {
+      case 1:
+        setAddOn1(!addOn1);
+        break;
+      case 2:
+        setAddOn2(!addOn2);
+        break;
+      case 3:
+        setAddOn3(!addOn3);
+        break;
+    }
   };
 
   return (
@@ -44,19 +52,22 @@ function AddOns({ MonthlyState, DataState }) {
           name="addons"
           data={addOnData[0]}
           monthly={monthly}
-          checked={checked}
+          checked={addOn1}
+          selectItem={selectItem}
         />
         <CheckboxTemplate
           name="addons"
           data={addOnData[1]}
           monthly={monthly}
-          checked={checked}
+          checked={addOn2}
+          selectItem={selectItem}
         />
         <CheckboxTemplate
           name="addons"
           data={addOnData[2]}
           monthly={monthly}
-          checked={checked}
+          checked={addOn3}
+          selectItem={selectItem}
         />
       </form>
     </div>
