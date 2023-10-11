@@ -19,7 +19,7 @@ function Progress(props) {
         <h2 className="text-base font-[400] text-[#D6D9E6]">
           STEP {props.step}
         </h2>
-        <h2 className="text-md font-[500] text-[#F0F6FF]">{props.progress}</h2>
+        <h2 className="text-md font-[600] text-white">{props.progress}</h2>
       </div>
     </div>
   );

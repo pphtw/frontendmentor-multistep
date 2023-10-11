@@ -1,28 +1,18 @@
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import Sidebar from "../molegules/Sidebar";
 import PersonalInfo from "../molegules/PersonalInfo";
 import Plan from "../molegules/Plan";
 import AddOns from "../molegules/AddOns";
 import Summary from "../molegules/Summary";
 
-function BodyInformation({
-  MonthlyState,
-  progress,
-  textInputHandler,
-  DataState,
-}) {
+function BodyInformation({ MonthlyState, progress, DataState }) {
   switch (parseInt(progress)) {
     case 1:
-      return (
-        <PersonalInfo
-          textInputHandler={textInputHandler}
-          DataState={DataState}
-        />
-      );
+      return <PersonalInfo DataState={DataState} />;
     case 2:
-      return <Plan MonthlyState={MonthlyState} />;
+      return <Plan MonthlyState={MonthlyState} DataState={DataState} />;
     case 3:
-      return <AddOns MonthlyState={MonthlyState} />;
+      return <AddOns MonthlyState={MonthlyState} DataState={DataState} />;
     case 4:
       return <Summary MonthlyState={MonthlyState} />;
   }
@@ -47,18 +37,46 @@ function Card() {
 
   const [data, setData] = useState(inputData);
 
+  const [nameInput, setName] = useState("");
+  const [emailInput, setEmail] = useState("");
+  const [phoneInput, setPhone] = useState("");
+  const [plan, setPlan] = useState(1);
+  const [addOns, setAddOns] = useState([]);
+
   const DataState = {
-    data,
-    setData,
+    nameInput,
+    setName,
+    emailInput,
+    setEmail,
+    phoneInput,
+    setPhone,
+    plan,
+    setPlan,
+    addOns,
+    setAddOns,
   };
 
-  const textInputHandler = () => {};
-
   const progressOneHandler = () => {
-    setActive(2);
+    if (
+      nameInput.trim() === "" ||
+      emailInput.trim() === "" ||
+      phoneInput.trim() === ""
+    ) {
+      // console.log(console.error());
+    } else {
+      data.name = nameInput;
+      data.email = emailInput;
+      data.phone = phoneInput;
+
+      setActive(2);
+    }
   };
 
   const progressTwoHandler = () => {
+    data.plan = plan;
+    data.monthly = monthly;
+
+    console.log(data);
     setActive(3);
   };
 
@@ -78,15 +96,22 @@ function Card() {
             <BodyInformation
               progress={1}
               MonthlyState={MonthlyState}
-              textInputHandler={textInputHandler}
               DataState={DataState}
             />
           )}
           {active === 2 && (
-            <BodyInformation progress={2} MonthlyState={MonthlyState} />
+            <BodyInformation
+              progress={2}
+              MonthlyState={MonthlyState}
+              DataState={DataState}
+            />
           )}
           {active === 3 && (
-            <BodyInformation progress={3} MonthlyState={MonthlyState} />
+            <BodyInformation
+              progress={3}
+              MonthlyState={MonthlyState}
+              DataState={DataState}
+            />
           )}
           {active === 4 && (
             <BodyInformation progress={4} MonthlyState={MonthlyState} />

@@ -1,7 +1,8 @@
 import { CardHeader, OptionTemplate } from "../../../templates/CardTemplate";
 
-function Plan({ MonthlyState }) {
+function Plan({ MonthlyState, DataState }) {
   const { monthly, setMonthly } = MonthlyState;
+  const { plan, setPlan } = DataState;
 
   const planData = [
     { id: 1, planName: "arcade", month: 9, year: 90 },
@@ -20,22 +21,25 @@ function Plan({ MonthlyState }) {
           <OptionTemplate
             name="plan"
             plan={planData[0]}
-            selected={true}
+            selected={plan === 1}
             monthly={monthly}
+            selectPlan={() => setPlan(1)}
             required
           />
           <OptionTemplate
             name="plan"
             plan={planData[1]}
             monthly={monthly}
-            selected={false}
+            selected={plan === 2}
+            selectPlan={() => setPlan(2)}
             required
           />
           <OptionTemplate
             name="plan"
             plan={planData[2]}
             monthly={monthly}
-            selected={false}
+            selected={plan === 3}
+            selectPlan={() => setPlan(3)}
             required
           />
         </div>

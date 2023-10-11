@@ -1,6 +1,10 @@
 import { CardHeader, CheckboxTemplate } from "../../../templates/CardTemplate";
-function AddOns({ MonthlyState }) {
+import { useState } from "react";
+function AddOns({ MonthlyState, DataState }) {
   const { monthly } = MonthlyState;
+  const { addOns, setAddOns } = DataState;
+  const [checked, setchecked] = useState(false);
+
   const addOnData = [
     {
       id: 1,
@@ -24,6 +28,11 @@ function AddOns({ MonthlyState }) {
       year: 10,
     },
   ];
+
+  const selectItem = () => {
+    setchecked(!checked);
+  };
+
   return (
     <div>
       <CardHeader
@@ -31,9 +40,24 @@ function AddOns({ MonthlyState }) {
         desc="Add-ons help enhance your gaming experience."
       />
       <form className="flex flex-col gap-y-5 my-10 w-full ">
-        <CheckboxTemplate name="addons" data={addOnData[0]} monthly={monthly} />
-        <CheckboxTemplate name="addons" data={addOnData[1]} monthly={monthly} />
-        <CheckboxTemplate name="addons" data={addOnData[2]} monthly={monthly} />
+        <CheckboxTemplate
+          name="addons"
+          data={addOnData[0]}
+          monthly={monthly}
+          checked={checked}
+        />
+        <CheckboxTemplate
+          name="addons"
+          data={addOnData[1]}
+          monthly={monthly}
+          checked={checked}
+        />
+        <CheckboxTemplate
+          name="addons"
+          data={addOnData[2]}
+          monthly={monthly}
+          checked={checked}
+        />
       </form>
     </div>
   );

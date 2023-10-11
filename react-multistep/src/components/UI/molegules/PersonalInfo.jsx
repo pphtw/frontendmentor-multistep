@@ -2,35 +2,21 @@ import { useState } from "react";
 import { CardHeader, InputTemplate } from "../../../templates/CardTemplate";
 
 function PersonalInfo({ DataState }) {
-  const { data, setData } = DataState;
-
-  const personalData = {
-    name: "",
-    email: "",
-    phone: "",
-    plan: 1,
-    monthly: true,
-    addons: [],
-  };
+  const { nameInput, setName, emailInput, setEmail, phoneInput, setPhone } =
+    DataState;
 
   const setDataHandler = (e) => {
     switch (e.target.name) {
       case "name":
-        personalData.name = e.target.value;
-
+        setName(e.target.value);
         break;
       case "email":
-        personalData.email = e.target.value;
-
+        setEmail(e.target.value);
         break;
       case "phone":
-        personalData.phone = e.target.value;
-
+        setPhone(e.target.value);
         break;
     }
-    setData(personalData);
-
-    // console.log(data);
   };
 
   return (
@@ -42,7 +28,7 @@ function PersonalInfo({ DataState }) {
       <div className="flex flex-col my-10">
         <form>
           <InputTemplate
-            DataState={DataState}
+            value={nameInput}
             field="name"
             label="name"
             type="text"
@@ -50,7 +36,7 @@ function PersonalInfo({ DataState }) {
             inputHandler={setDataHandler}
           />
           <InputTemplate
-            DataState={DataState}
+            value={emailInput}
             field="email"
             label="email address"
             type="email"
@@ -58,7 +44,7 @@ function PersonalInfo({ DataState }) {
             inputHandler={setDataHandler}
           />
           <InputTemplate
-            DataState={DataState}
+            value={phoneInput}
             field="phone"
             label="phone number"
             type="text"

@@ -14,48 +14,50 @@ function CardHeader(props) {
   );
 }
 
-function InputTemplate({
-  field,
-  label,
-  type,
-  inputHandler,
-  example,
-  DataState,
-}) {
-  const { data } = DataState;
-
-  const foundObject = Object.entries(data).find((e) => e[0] === field);
-  let value = foundObject[1];
-
+function InputTemplate({ field, label, type, inputHandler, example, value }) {
   return (
     <div className="flex flex-col mb-5">
-      <label htmlFor={field} className="capitalize font-[400] text-[#02295A]">
-        {label}
-      </label>
+      <div className="flex flex-row justify-between">
+        <label htmlFor={field} className="capitalize font-[600] text-[#02295A]">
+          {label}
+        </label>
+        <label
+          htmlFor={field}
+          className={`capitalize font-[600] text-[#ED3548] ${
+            value.trim() === "" ? "" : "hidden"
+          }`}
+        >
+          This field is required
+        </label>
+      </div>
+
       <input
         value={value}
         name={field}
         id={field}
         type={type}
         placeholder={example}
-        className="border border-[#9699AB] rounded-lg h-12 p-5 mt-2"
+        className={`border border-[#9699AB] text-[#02295A] font-[600] rounded-lg h-12 p-5 mt-2 ${
+          value.trim() === "" ? "border-[#ED3548]" : ""
+        }`}
         onInput={inputHandler}
       />
     </div>
   );
 }
 
-function OptionTemplate(props) {
-  const dataItem = props.plan;
+function OptionTemplate({ plan, name, selected, monthly, selectPlan }) {
+  const dataItem = plan;
   return (
     <div className="w-1/3">
       <input
         className="hidden peer"
         type="radio"
-        name={props.name}
+        name={name}
         value={dataItem.id}
         id={dataItem.id}
-        defaultChecked={props.selected}
+        defaultChecked={selected}
+        onClick={selectPlan}
       />
       <label
         htmlFor={dataItem.id}
@@ -74,8 +76,7 @@ function OptionTemplate(props) {
             {dataItem.planName}
           </p>
           <p>
-            ${props.monthly ? dataItem.month : dataItem.year}/
-            {props.monthly ? "mo" : "yr"}
+            ${monthly ? dataItem.month : dataItem.year}/{monthly ? "mo" : "yr"}
           </p>
         </div>
         {/* </div> */}
@@ -84,9 +85,10 @@ function OptionTemplate(props) {
   );
 }
 
-function CheckboxTemplate(props) {
-  const [checked, setchecked] = useState(false);
-  const dataItem = props.data;
+function CheckboxTemplate({ data, selectItem, name, monthly, checked }) {
+  console.log(checked);
+  // const [checked, setchecked] = useState(false);
+  const dataItem = data;
   return (
     <div className="flex flex-row w-full">
       <label
@@ -98,11 +100,11 @@ function CheckboxTemplate(props) {
         <input
           className="w-5 h-5 rounded-lg peer accent-[#473DFF]"
           type="checkbox"
-          name={props.name}
+          name={name}
           id={dataItem.id}
           value={dataItem.id}
           required
-          onClick={() => setchecked(!checked)}
+          onClick={selectItem}
         />
 
         <div className="w-full ml-5">
@@ -111,7 +113,7 @@ function CheckboxTemplate(props) {
         </div>
         <div className=" flex items-center justify-self-end">
           <p className="text-[#473DFF]">
-            +${dataItem.month}/{props.monthly ? "mo" : "yr"}
+            +${dataItem.month}/{monthly ? "mo" : "yr"}
           </p>
         </div>
       </label>
