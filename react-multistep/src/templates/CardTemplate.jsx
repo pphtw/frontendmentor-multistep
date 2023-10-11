@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useRef } from "react";
 
 function CardHeader(props) {
   return (
@@ -13,22 +14,32 @@ function CardHeader(props) {
   );
 }
 
-function InputTemplate(props) {
+function InputTemplate({
+  field,
+  label,
+  type,
+  inputHandler,
+  example,
+  DataState,
+}) {
+  const { data } = DataState;
+
+  const foundObject = Object.entries(data).find((e) => e[0] === field);
+  let value = foundObject[1];
+
   return (
     <div className="flex flex-col mb-5">
-      <label
-        htmlFor={props.field}
-        className="capitalize font-[400] text-[#02295A]"
-      >
-        {props.label}
+      <label htmlFor={field} className="capitalize font-[400] text-[#02295A]">
+        {label}
       </label>
       <input
-        id={props.field}
-        type={props.type}
-        placeholder={props.example}
+        value={value}
+        name={field}
+        id={field}
+        type={type}
+        placeholder={example}
         className="border border-[#9699AB] rounded-lg h-12 p-5 mt-2"
-        value={props.value}
-        onInput={props.inputHandler}
+        onInput={inputHandler}
       />
     </div>
   );

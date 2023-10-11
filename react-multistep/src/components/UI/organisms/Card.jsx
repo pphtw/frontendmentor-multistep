@@ -5,10 +5,20 @@ import Plan from "../molegules/Plan";
 import AddOns from "../molegules/AddOns";
 import Summary from "../molegules/Summary";
 
-function BodyInformation({ MonthlyState, progress, textInputHandler }) {
+function BodyInformation({
+  MonthlyState,
+  progress,
+  textInputHandler,
+  DataState,
+}) {
   switch (parseInt(progress)) {
     case 1:
-      return <PersonalInfo textInputHandler={textInputHandler} />;
+      return (
+        <PersonalInfo
+          textInputHandler={textInputHandler}
+          DataState={DataState}
+        />
+      );
     case 2:
       return <Plan MonthlyState={MonthlyState} />;
     case 3:
@@ -33,6 +43,13 @@ function Card() {
     plan: 1,
     monthly: true,
     addons: [],
+  };
+
+  const [data, setData] = useState(inputData);
+
+  const DataState = {
+    data,
+    setData,
   };
 
   const textInputHandler = () => {};
@@ -62,6 +79,7 @@ function Card() {
               progress={1}
               MonthlyState={MonthlyState}
               textInputHandler={textInputHandler}
+              DataState={DataState}
             />
           )}
           {active === 2 && (
