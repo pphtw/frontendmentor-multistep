@@ -1,14 +1,8 @@
 import { CardHeader, OptionTemplate } from "../../../templates/CardTemplate";
 
-function Plan({ MonthlyState, DataState }) {
-  const { monthly, setMonthly } = MonthlyState;
-  const { plan, setPlan } = DataState;
+function Plan({ DataState }) {
+  const { plan, setPlan, planData, monthly, setMonthly } = DataState;
 
-  const planData = [
-    { id: 1, planName: "arcade", month: 9, year: 90 },
-    { id: 2, planName: "advanced", month: 12, year: 120 },
-    { id: 3, planName: "pro", month: 15, year: 150 },
-  ];
   return (
     <div>
       <CardHeader

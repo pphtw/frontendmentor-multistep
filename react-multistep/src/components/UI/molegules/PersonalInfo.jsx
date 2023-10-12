@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { CardHeader, InputTemplate } from "../../../templates/CardTemplate";
 
-function PersonalInfo({ DataState }) {
+function PersonalInfo({ DataState, FieldState }) {
   const { nameInput, setName, emailInput, setEmail, phoneInput, setPhone } =
     DataState;
 
@@ -34,6 +34,7 @@ function PersonalInfo({ DataState }) {
             type="text"
             example="e.g. Stephen King"
             inputHandler={setDataHandler}
+            FieldState={FieldState}
           />
           <InputTemplate
             value={emailInput}
@@ -42,6 +43,7 @@ function PersonalInfo({ DataState }) {
             type="email"
             example="e.g. stephenking@lorem.com"
             inputHandler={setDataHandler}
+            FieldState={FieldState}
           />
           <InputTemplate
             value={phoneInput}
@@ -50,6 +52,7 @@ function PersonalInfo({ DataState }) {
             type="text"
             example="e.g. +1 234 567 890"
             inputHandler={setDataHandler}
+            FieldState={FieldState}
           />
         </form>
       </div>

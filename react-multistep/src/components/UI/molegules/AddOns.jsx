@@ -1,31 +1,15 @@
 import { CardHeader, CheckboxTemplate } from "../../../templates/CardTemplate";
-function AddOns({ MonthlyState, DataState }) {
-  const { monthly } = MonthlyState;
-  const { addOn1, setAddOn1, addOn2, setAddOn2, addOn3, setAddOn3 } = DataState;
-
-  const addOnData = [
-    {
-      id: 1,
-      addOn: "Online service",
-      desc: "Access to multiplayer games",
-      month: 1,
-      year: 10,
-    },
-    {
-      id: 2,
-      addOn: "Larger storage",
-      desc: "Extra 1TB of cloud save",
-      month: 2,
-      year: 20,
-    },
-    {
-      id: 3,
-      addOn: "Customizable Profile",
-      desc: "Custom theme on your profile",
-      month: 1,
-      year: 10,
-    },
-  ];
+function AddOns({ DataState }) {
+  const {
+    addOn1,
+    setAddOn1,
+    addOn2,
+    setAddOn2,
+    addOn3,
+    setAddOn3,
+    addOnData,
+    monthly,
+  } = DataState;
 
   const selectItem = (e) => {
     switch (parseInt(e.target.value)) {

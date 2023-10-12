@@ -1,0 +1,31 @@
+{
+  "planData": [
+    { "id": 1, "planName": "arcade", "month": 9, "year": 90 },
+    { "id": 2, "planName": "advanced", "month": 12, "year": 120 },
+    { "id": 3, "planName": "pro", "month": 15, "year": 150 }
+  ],
+
+  "addOnData": [
+    {
+      "id": 1,
+      "addOn": "Online service",
+      "desc": "Access to multiplayer games",
+      "month": 1,
+      "year": 10
+    },
+    {
+      "id": 2,
+      "addOn": "Larger storage",
+      "desc": "Extra 1TB of cloud save",
+      "month": 2,
+      "year": 20
+    },
+    {
+      "id": 3,
+      "addOn": "Customizable Profile",
+      "desc": "Custom theme on your profile",
+      "month": 1,
+      "year": 10
+    }
+  ]
+}

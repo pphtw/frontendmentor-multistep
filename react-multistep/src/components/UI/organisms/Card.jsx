@@ -1,32 +1,44 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Sidebar from "../molegules/Sidebar";
 import PersonalInfo from "../molegules/PersonalInfo";
 import Plan from "../molegules/Plan";
 import AddOns from "../molegules/AddOns";
 import Summary from "../molegules/Summary";
+import DataService from "../../../lib/dataService";
 
-function BodyInformation({ MonthlyState, progress, DataState }) {
+const dataService = new DataService();
+
+function BodyInformation({ progress, DataState, FieldState }) {
   switch (parseInt(progress)) {
     case 1:
-      return <PersonalInfo DataState={DataState} />;
+      return <PersonalInfo DataState={DataState} FieldState={FieldState} />;
     case 2:
-      return <Plan MonthlyState={MonthlyState} DataState={DataState} />;
+      return <Plan DataState={DataState} />;
     case 3:
-      return <AddOns MonthlyState={MonthlyState} DataState={DataState} />;
+      return <AddOns DataState={DataState} />;
     case 4:
-      return <Summary MonthlyState={MonthlyState} />;
+      return <Summary DataState={DataState} />;
   }
 }
 
 function Card() {
+  const [planData, setPlanData] = useState([]);
+  const [addOnData, setAddOnData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const planFetch = await dataService.getData("planData");
+      const addOnFetch = await dataService.getData("addOnData");
+      setPlanData(planFetch);
+      setAddOnData(addOnFetch);
+    };
+    fetchData();
+  }, []);
+
   const [active, setActive] = useState(1);
   const [monthly, setMonthly] = useState(true);
-  const MonthlyState = {
-    monthly,
-    setMonthly,
-  };
 
-  const inputData = {
+  const dataTemplate = {
     name: "",
     email: "",
     phone: "",
@@ -37,7 +49,7 @@ function Card() {
     addOn3: false,
   };
 
-  const [data, setData] = useState(inputData);
+  const [inputData, setInputData] = useState(dataTemplate);
 
   const [nameInput, setName] = useState("");
   const [emailInput, setEmail] = useState("");
@@ -46,8 +58,11 @@ function Card() {
   const [addOn1, setAddOn1] = useState(false);
   const [addOn2, setAddOn2] = useState(false);
   const [addOn3, setAddOn3] = useState(false);
+  const [firstTime, setFirstTime] = useState(true);
 
   const DataState = {
+    monthly,
+    setMonthly,
     nameInput,
     setName,
     emailInput,
@@ -62,9 +77,15 @@ function Card() {
     setAddOn2,
     addOn3,
     setAddOn3,
+    inputData,
+    planData,
+    addOnData,
   };
 
+  const FieldState = { firstTime, setFirstTime };
+
   const progressOneHandler = () => {
+    setFirstTime(false);
     if (
       nameInput.trim() === "" ||
       emailInput.trim() === "" ||
@@ -72,28 +93,25 @@ function Card() {
     ) {
       // console.log(console.error());
     } else {
-      data.name = nameInput;
-      data.email = emailInput;
-      data.phone = phoneInput;
+      inputData.name = nameInput;
+      inputData.email = emailInput;
+      inputData.phone = phoneInput;
 
       setActive(2);
     }
   };
 
   const progressTwoHandler = () => {
-    data.plan = plan;
-    data.monthly = monthly;
-
-    console.log(data);
+    inputData.plan = plan;
+    inputData.monthly = monthly;
     setActive(3);
   };
 
   const progressThreeHanler = () => {
-    data.addOn1 = addOn1;
-    data.addOn2 = addOn2;
-    data.addOn3 = addOn3;
+    inputData.addOn1 = addOn1;
+    inputData.addOn2 = addOn2;
+    inputData.addOn3 = addOn3;
     setActive(4);
-    console.log(data);
   };
 
   const confirm = () => {};
@@ -107,30 +125,20 @@ function Card() {
           {active === 1 && (
             <BodyInformation
               progress={1}
-              MonthlyState={MonthlyState}
               DataState={DataState}
+              FieldState={FieldState}
             />
           )}
           {active === 2 && (
-            <BodyInformation
-              progress={2}
-              MonthlyState={MonthlyState}
-              DataState={DataState}
-            />
+            <BodyInformation progress={2} DataState={DataState} />
           )}
           {active === 3 && (
-            <BodyInformation
-              progress={3}
-              MonthlyState={MonthlyState}
-              DataState={DataState}
-            />
+            <BodyInformation progress={3} DataState={DataState} />
           )}
           {active === 4 && (
-            <BodyInformation progress={4} MonthlyState={MonthlyState} />
+            <BodyInformation progress={4} DataState={DataState} />
           )}
-          {active === 5 && (
-            <BodyInformation progress={5} MonthlyState={MonthlyState} />
-          )}
+          {active === 5 && <BodyInformation progress={5} />}
         </div>
 
         {/* button section */}

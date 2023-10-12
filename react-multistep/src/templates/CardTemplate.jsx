@@ -14,7 +14,16 @@ function CardHeader(props) {
   );
 }
 
-function InputTemplate({ field, label, type, inputHandler, example, value }) {
+function InputTemplate({
+  field,
+  label,
+  type,
+  inputHandler,
+  example,
+  value,
+  FieldState,
+}) {
+  const { firstTime, setFirstTime } = FieldState;
   return (
     <div className="flex flex-col mb-5">
       <div className="flex flex-row justify-between">
@@ -24,7 +33,7 @@ function InputTemplate({ field, label, type, inputHandler, example, value }) {
         <label
           htmlFor={field}
           className={`capitalize font-[600] text-[#ED3548] ${
-            value.trim() === "" ? "" : "hidden"
+            firstTime ? "hidden" : value.trim() === "" ? "" : "hidden"
           }`}
         >
           This field is required
@@ -38,7 +47,7 @@ function InputTemplate({ field, label, type, inputHandler, example, value }) {
         type={type}
         placeholder={example}
         className={`border border-[#9699AB] text-[#02295A] font-[600] rounded-lg h-12 p-5 mt-2 ${
-          value.trim() === "" ? "border-[#ED3548]" : ""
+          firstTime ? "" : value.trim() === "" ? "border-[#ED3548]" : ""
         }`}
         onInput={inputHandler}
       />
