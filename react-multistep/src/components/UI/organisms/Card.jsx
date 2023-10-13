@@ -117,7 +117,7 @@ function Card() {
   };
 
   return (
-    <div className="flex flex-row w-3/5 bg-white rounded-xl h-2/3 p-3">
+    <div className="flex flex-row w-1/2 bg-white rounded-xl h-2/3 p-3">
       <Sidebar progress={active} />
       <div
         className={`flex flex-col justify-${
