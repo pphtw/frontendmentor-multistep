@@ -22,14 +22,17 @@ function Summary({ DataState, changePlan }) {
       <div className="flex flex-col my-10 text-[#9699AB]">
         <div className="flex flex-col  bg-[#F0F6FF] w-full rounded-lg px-5">
           {/* Plan */}
-          <div className="flex flex-row items-center justify-between py-5 w-full border-b">
+          <div className="flex flex-row items-center justify-between py-5 w-full">
             <div className="flex flex-col">
               <p className="text-[#02295A] font-[600] capitalize">
                 <span>{selectedPlan.planName} </span>(
                 {monthly ? "Monthly" : "Yearly"})
               </p>
               <p className="underline">
-                <span className="cursor-pointer" onClick={changePlan}>
+                <span
+                  className="cursor-pointer hover:text-[#473DFF]"
+                  onClick={changePlan}
+                >
                   Change
                 </span>
               </p>
@@ -40,7 +43,11 @@ function Summary({ DataState, changePlan }) {
           </div>
 
           {/* AddOns */}
-          <div className="flex flex-col gap-3 py-5">
+          <div
+            className={`flex flex-col gap-3 py-5 ${
+              selectedAddOns.length === 0 ? "hidden" : " border-t"
+            }`}
+          >
             {selectedAddOns.map((item, index) => (
               <div
                 className="flex flex-row justify-between items-center"

@@ -107,8 +107,13 @@ function Card() {
     setActive(4);
   };
 
-  const confirm = () => {
-    setActive(5);
+  const submitForm = async () => {
+    const response = await dataService.addData(inputData);
+    if (response === 201) {
+      setActive(5);
+    } else {
+      console.error("SUBMIT FORM FAIL: PLEASE TRY AGAIN LATER");
+    }
   };
 
   return (
@@ -174,13 +179,13 @@ function Card() {
                 ? progressTwoHandler
                 : active === 3
                 ? progressThreeHanler
-                : confirm
+                : submitForm
             }
-            className={`bg-[#02295A] font-[500] text-white p-3 rounded-md w-1/4 hover:bg-[#101c2c] ease-linear duration-75 ${
+            className={`bg-[#02295A] font-[500] text-white p-3 rounded-md w-1/4 hover:bg-[#02295A]/90 ease-linear duration-75 ${
               active === 1
                 ? "justify-self-end"
                 : active === 4
-                ? "bg-[#473DFF] hover:bg-[#4039bb]"
+                ? "bg-[#473DFF] hover:bg-[#473DFF]/80"
                 : active === 5
                 ? "hidden"
                 : ""
