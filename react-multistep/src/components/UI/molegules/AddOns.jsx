@@ -1,27 +1,14 @@
 import { CardHeader, CheckboxTemplate } from "../../../templates/CardTemplate";
 function AddOns({ DataState }) {
-  const {
-    addOn1,
-    setAddOn1,
-    addOn2,
-    setAddOn2,
-    addOn3,
-    setAddOn3,
-    addOnData,
-    monthly,
-  } = DataState;
+  const { addOns, addOnData, monthly } = DataState;
 
-  const selectItem = (e) => {
-    switch (parseInt(e.target.value)) {
-      case 1:
-        setAddOn1(!addOn1);
-        break;
-      case 2:
-        setAddOn2(!addOn2);
-        break;
-      case 3:
-        setAddOn3(!addOn3);
-        break;
+  const addOrRemove = (e) => {
+    let id = parseInt(e.target.value);
+    if (e.target.checked) {
+      addOns.push(id);
+    } else {
+      let index = addOns.findIndex((e) => e === id);
+      addOns.splice(index, 1);
     }
   };
 
@@ -32,27 +19,16 @@ function AddOns({ DataState }) {
         desc="Add-ons help enhance your gaming experience."
       />
       <form className="flex flex-col gap-y-5 my-10 w-full ">
-        <CheckboxTemplate
-          name="addons"
-          data={addOnData[0]}
-          monthly={monthly}
-          checked={addOn1}
-          selectItem={selectItem}
-        />
-        <CheckboxTemplate
-          name="addons"
-          data={addOnData[1]}
-          monthly={monthly}
-          checked={addOn2}
-          selectItem={selectItem}
-        />
-        <CheckboxTemplate
-          name="addons"
-          data={addOnData[2]}
-          monthly={monthly}
-          checked={addOn3}
-          selectItem={selectItem}
-        />
+        {addOnData.map((addon, index) => (
+          <CheckboxTemplate
+            key={index}
+            name="addons"
+            data={addon}
+            monthly={monthly}
+            checked={addOns.some((e) => e === addon.id)}
+            selectItem={addOrRemove}
+          />
+        ))}
       </form>
     </div>
   );

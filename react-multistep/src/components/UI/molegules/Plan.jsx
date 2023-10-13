@@ -12,30 +12,17 @@ function Plan({ DataState }) {
 
       <form>
         <div className="flex flex-row justify-between gap-x-5 my-10 w-full ">
-          <OptionTemplate
-            name="plan"
-            plan={planData[0]}
-            selected={plan === 1}
-            monthly={monthly}
-            selectPlan={() => setPlan(1)}
-            required
-          />
-          <OptionTemplate
-            name="plan"
-            plan={planData[1]}
-            monthly={monthly}
-            selected={plan === 2}
-            selectPlan={() => setPlan(2)}
-            required
-          />
-          <OptionTemplate
-            name="plan"
-            plan={planData[2]}
-            monthly={monthly}
-            selected={plan === 3}
-            selectPlan={() => setPlan(3)}
-            required
-          />
+          {planData.map((item, index) => (
+            <OptionTemplate
+              key={index}
+              name="plan"
+              plan={item}
+              selected={plan === item.id}
+              monthly={monthly}
+              selectPlan={() => setPlan(1)}
+              required
+            />
+          ))}
         </div>
       </form>
 

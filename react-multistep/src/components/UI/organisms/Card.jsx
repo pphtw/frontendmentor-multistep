@@ -55,6 +55,7 @@ function Card() {
   const [emailInput, setEmail] = useState("");
   const [phoneInput, setPhone] = useState("");
   const [plan, setPlan] = useState(1);
+  const [addOns, setAddOns] = useState([]);
   const [addOn1, setAddOn1] = useState(false);
   const [addOn2, setAddOn2] = useState(false);
   const [addOn3, setAddOn3] = useState(false);
@@ -80,6 +81,8 @@ function Card() {
     inputData,
     planData,
     addOnData,
+    addOns,
+    setAddOns,
   };
 
   const FieldState = { firstTime, setFirstTime };

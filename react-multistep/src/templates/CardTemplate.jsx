@@ -96,22 +96,24 @@ function OptionTemplate({ plan, name, selected, monthly, selectPlan }) {
 
 function CheckboxTemplate({ data, selectItem, name, monthly, checked }) {
   const dataItem = data;
+  const onClickHandler = (e) => {
+    selectItem(e);
+  };
   return (
     <div className="flex flex-row w-full">
       <label
         htmlFor={dataItem.id}
-        className={`flex flex-row p-5 peer justify-items-stretch w-full h-full items-center rounded-lg cursor-pointer border hover:border-[#473DFF] hover:bg-[#473DFF]/5 ${
-          checked ? "bg-[#473DFF]/5 border-[#473DFF]" : ""
-        } `}
+        className={`flex flex-row p-5 justify-items-stretch w-full h-full items-center rounded-lg cursor-pointer border hover:border-[#473DFF] hover:bg-[#473DFF]/5 [&:has(input:checked)]:bg-[#473DFF]/5 [&:has(input:checked)]:border-[#473DFF]`}
       >
         <input
-          className="w-5 h-5 rounded-lg peer accent-[#473DFF]"
+          defaultChecked={checked}
+          className="w-5 h-5 rounded-lg accent-[#473DFF]"
           type="checkbox"
           name={name}
           id={dataItem.id}
           value={dataItem.id}
           required
-          onClick={selectItem}
+          onClick={onClickHandler}
         />
 
         <div className="w-full ml-5">
