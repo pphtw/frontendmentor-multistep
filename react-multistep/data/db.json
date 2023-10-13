@@ -42,18 +42,5 @@
       "year": 10
     }
   ],
-  "submitData": [
-    {
-      "name": "Phutawan Palakavong",
-      "email": "phutawan.pala@gmail.com",
-      "phone": "0830903214",
-      "plan": 2,
-      "monthly": true,
-      "addOns": [
-        1,
-        2
-      ],
-      "id": 1
-    }
-  ]
+  "submitData": []
 }
