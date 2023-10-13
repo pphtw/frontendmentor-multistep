@@ -118,14 +118,14 @@ function Card() {
 
   return (
     <div className="lg:flex lg:flex-row lg:w-1/2 lg:bg-white lg:rounded-xl h-screen w-screen lg:h-2/3 lg:p-3">
-      <Sidebar progress={active} className="relative" />
+      <Sidebar progress={active} />
       <div
-        className={`flex flex-col relative lg:justify-${
+        className={`flex flex-col relative lg:mx-20 lg:h-full lg:w-full lg:p-0 lg:bg-inherit justify-${
           active === 5 ? "center" : "between"
-        } lg:mx-20 lg:h-full lg:w-full lg:p-0 lg:bg-inherit`}
+        } `}
       >
         {/* each section progress */}
-        <div className="flex flex-col lg:mx-0 mx-5 bg-white p-5 lg:p-0 rounded-lg relative">
+        <div className="flex flex-col lg:mx-0 mx-5 lg:mt-0 mt-32 bg-white px-10 pb-10 lg:p-0 rounded-lg relative">
           {active === 1 && (
             <BodyInformation
               progress={1}
@@ -150,7 +150,7 @@ function Card() {
         </div>
 
         {/* button section */}
-        <div className="lg:flex hidden flex-row justify-between self-end w-full mb-5 mx-0 mt-5">
+        <div className="lg:flex hidden flex-row justify-between self-end w-full">
           <button
             className={`hover:text-[#473DFF] ease-linear duration-75 font-[500] ${
               active === 1
@@ -195,6 +195,7 @@ function Card() {
           </button>
         </div>
 
+        {/* mobile view */}
         <div className="lg:hidden flex flex-row justify-between fixed bottom-0 p-5 bg-white w-full">
           <button
             className={`hover:text-[#473DFF] ease-linear duration-75 font-[500] ${
@@ -226,7 +227,7 @@ function Card() {
                 ? progressThreeHanler
                 : submitForm
             }
-            className={`bg-[#02295A] font-[500] text-white p-3 rounded-md w-1/4 hover:bg-[#02295A]/90 ease-linear duration-75 ${
+            className={`bg-[#02295A] font-[500] text-white p-3 rounded-md w-1/3 hover:bg-[#02295A]/90 ease-linear duration-75 ${
               active === 1
                 ? "justify-self-end"
                 : active === 4
