@@ -46,7 +46,7 @@ function InputTemplate({
         id={field}
         type={type}
         placeholder={example}
-        className={`border border-[#9699AB] text-[#02295A] font-[600] rounded-lg h-12 p-5 mt-2 ${
+        className={`border border-[#9699AB] text-[#02295A] font-[500] rounded-lg h-12 p-5 mt-2 ${
           firstTime ? "" : value.trim() === "" ? "border-[#ED3548]" : ""
         }`}
         onInput={inputHandler}
