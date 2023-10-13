@@ -11,7 +11,7 @@ function Plan({ DataState }) {
       />
 
       <form>
-        <div className="flex flex-row justify-between gap-x-5 my-10 w-full ">
+        <div className="flex lg:flex-row flex-col justify-between gap-y-5 lg:gap-x-5 my-10 w-full ">
           {planData.map((item, index) => (
             <OptionTemplate
               key={index}

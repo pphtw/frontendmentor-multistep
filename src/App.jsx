@@ -3,9 +3,9 @@ import Card from "./components/UI/organisms/Card";
 
 function App(props) {
   return (
-    <div className="flex flex-col justify-center items-center h-screen">
+    <div className="flex flex-col lg:justify-center lg:items-center lg:h-screen">
       <Card progress={props.progress} />
-      <div className="attribution flex justify-center">
+      <div className="lg:attribution lg:flex lg:justify-center hidden">
         <p>
           Challenge by{" "}
           <a

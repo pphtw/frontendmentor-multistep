@@ -58,7 +58,7 @@ function InputTemplate({
 function OptionTemplate({ plan, name, selected, monthly, selectPlan }) {
   const dataItem = plan;
   return (
-    <div className="w-1/3">
+    <div className="lg:w-1/3 w-full">
       <input
         className="hidden peer"
         type="radio"
@@ -70,7 +70,7 @@ function OptionTemplate({ plan, name, selected, monthly, selectPlan }) {
       />
       <label
         htmlFor={dataItem.id}
-        className="flex cursor-pointer flex-col border p-5 rounded-md w-full h-48 hover:border-[#473DFF] hover:bg-[#473DFF]/5 peer-checked:border-[#473DFF] peer-checked:bg-[#473DFF]/5"
+        className="flex cursor-pointer flex-row gap-x-5 lg:gap-0 lg:flex-col border p-5 rounded-md w-full lg:h-48 hover:border-[#473DFF] hover:bg-[#473DFF]/5 peer-checked:border-[#473DFF] peer-checked:bg-[#473DFF]/5"
       >
         {/* <div className="flex flex-col border p-5 rounded-md h-48"> */}
         <div className="h-2/3">
