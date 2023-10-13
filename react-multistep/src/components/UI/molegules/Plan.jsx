@@ -19,7 +19,7 @@ function Plan({ DataState }) {
               plan={item}
               selected={plan === item.id}
               monthly={monthly}
-              selectPlan={() => setPlan(1)}
+              selectPlan={() => setPlan(item.id)}
               required
             />
           ))}

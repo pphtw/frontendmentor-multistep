@@ -1,5 +1,5 @@
 import { CardHeader } from "../../../templates/CardTemplate";
-function Summary({ DataState }) {
+function Summary({ DataState, changePlan }) {
   const { inputData, planData, addOnData, monthly } = DataState;
 
   const selectedPlan = planData.find((e) => e.id === inputData.plan);
@@ -28,7 +28,11 @@ function Summary({ DataState }) {
                 <span>{selectedPlan.planName} </span>(
                 {monthly ? "Monthly" : "Yearly"})
               </p>
-              <p className="underline">Change</p>
+              <p className="underline">
+                <span className="cursor-pointer" onClick={changePlan}>
+                  Change
+                </span>
+              </p>
             </div>
             <div className="text-[#02295A] font-[700]">
               ${selectedPlan.month}/{monthly ? "mo" : "yr"}

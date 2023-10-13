@@ -8,7 +8,7 @@ import DataService from "../../../lib/dataService";
 
 const dataService = new DataService();
 
-function BodyInformation({ progress, DataState, FieldState }) {
+function BodyInformation({ progress, DataState, FieldState, changePlan }) {
   switch (parseInt(progress)) {
     case 1:
       return <PersonalInfo DataState={DataState} FieldState={FieldState} />;
@@ -17,7 +17,7 @@ function BodyInformation({ progress, DataState, FieldState }) {
     case 3:
       return <AddOns DataState={DataState} />;
     case 4:
-      return <Summary DataState={DataState} />;
+      return <Summary DataState={DataState} changePlan={changePlan} />;
   }
 }
 
@@ -97,12 +97,12 @@ function Card() {
     inputData.plan = plan;
     inputData.monthly = monthly;
     setActive(3);
+    console.log(inputData);
   };
 
   const progressThreeHanler = () => {
     inputData.addOns = addOns;
     setActive(4);
-    console.log(inputData);
   };
 
   const confirm = () => {};
@@ -127,7 +127,11 @@ function Card() {
             <BodyInformation progress={3} DataState={DataState} />
           )}
           {active === 4 && (
-            <BodyInformation progress={4} DataState={DataState} />
+            <BodyInformation
+              progress={4}
+              DataState={DataState}
+              changePlan={() => setActive(2)}
+            />
           )}
           {active === 5 && <BodyInformation progress={5} />}
         </div>
@@ -135,7 +139,9 @@ function Card() {
         {/* button section */}
         <div className="flex flex-row justify-between self-end w-full mb-5">
           <button
-            className={active === 1 ? "invisible" : "font-[400] text-[#9699AB]"}
+            className={`hover:text-[#473DFF] ease-linear duration-75 font-[500] ${
+              active === 1 ? "invisible" : "font-[400] text-[#9699AB]"
+            }`}
             onClick={
               active === 2
                 ? () => setActive(1)
@@ -158,11 +164,15 @@ function Card() {
                 ? progressThreeHanler
                 : confirm
             }
-            className={`bg-[#02295A] font-[400] text-white p-3 rounded-md w-1/4 hover:bg-[#101c2c] ease-linear duration-75 ${
-              active === 1 ? "justify-self-end" : ""
+            className={`bg-[#02295A] font-[500] text-white p-3 rounded-md w-1/4 hover:bg-[#101c2c] ease-linear duration-75 ${
+              active === 1
+                ? "justify-self-end"
+                : active === 4
+                ? "bg-[#473DFF] hover:bg-[#4039bb]"
+                : ""
             } `}
           >
-            Next Step
+            {active === 4 ? "Confirm" : "Next Step"}
           </button>
         </div>
       </div>
