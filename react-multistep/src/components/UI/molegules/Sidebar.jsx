@@ -35,7 +35,11 @@ function Sidebar(props) {
         progress="SELECT PLAN"
       />
       <Progress isActive={props.progress == 3} step="3" progress="ADD-ONS" />
-      <Progress isActive={props.progress == 4} step="4" progress="SUMMARY" />
+      <Progress
+        isActive={props.progress == 4 || props.progress == 5}
+        step="4"
+        progress="SUMMARY"
+      />
     </div>
   );
 }

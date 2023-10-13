@@ -5,6 +5,7 @@ import Plan from "../molegules/Plan";
 import AddOns from "../molegules/AddOns";
 import Summary from "../molegules/Summary";
 import DataService from "../../../lib/dataService";
+import SubmitResponse from "../molegules/SubmitResponse";
 
 const dataService = new DataService();
 
@@ -18,6 +19,8 @@ function BodyInformation({ progress, DataState, FieldState, changePlan }) {
       return <AddOns DataState={DataState} />;
     case 4:
       return <Summary DataState={DataState} changePlan={changePlan} />;
+    case 5:
+      return <SubmitResponse />;
   }
 }
 
@@ -97,7 +100,6 @@ function Card() {
     inputData.plan = plan;
     inputData.monthly = monthly;
     setActive(3);
-    console.log(inputData);
   };
 
   const progressThreeHanler = () => {
@@ -105,12 +107,18 @@ function Card() {
     setActive(4);
   };
 
-  const confirm = () => {};
+  const confirm = () => {
+    setActive(5);
+  };
 
   return (
     <div className="flex flex-row w-3/5 bg-white rounded-xl h-2/3 p-3">
       <Sidebar progress={active} />
-      <div className="flex flex-col justify-between mx-20 h-full w-full">
+      <div
+        className={`flex flex-col justify-${
+          active === 5 ? "center" : "between"
+        } mx-20 h-full w-full`}
+      >
         {/* each section progress */}
         <div className="flex flex-col">
           {active === 1 && (
@@ -140,7 +148,11 @@ function Card() {
         <div className="flex flex-row justify-between self-end w-full mb-5">
           <button
             className={`hover:text-[#473DFF] ease-linear duration-75 font-[500] ${
-              active === 1 ? "invisible" : "font-[400] text-[#9699AB]"
+              active === 1
+                ? "invisible"
+                : active === 5
+                ? "hidden"
+                : "font-[400] text-[#9699AB]"
             }`}
             onClick={
               active === 2
@@ -169,6 +181,8 @@ function Card() {
                 ? "justify-self-end"
                 : active === 4
                 ? "bg-[#473DFF] hover:bg-[#4039bb]"
+                : active === 5
+                ? "hidden"
                 : ""
             } `}
           >
